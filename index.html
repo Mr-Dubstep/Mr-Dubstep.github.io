@@ -14,10 +14,17 @@
       white-space: pre-wrap;
       font-size: 1.2em;
     }
+    #continue {
+      display: none;
+      color: #888;
+      margin-top: 20px;
+      font-style: italic;
+    }
   </style>
 </head>
 <body>
   <div id="boot"></div>
+  <div id="continue">[Press Enter or click anywhere to continue]</div>
 
   <script>
     const lines = [
@@ -26,30 +33,36 @@
       "Decrypting mission logs...",
       "Establishing temporal link...",
       "Boot sequence complete. Access granted."
-      "Press Enter/Click Anywhere to Continue."
     ];
 
     let i = 0;
     const bootDiv = document.getElementById("boot");
+    const continueDiv = document.getElementById("continue");
+    let bootComplete = false;
 
     function typeLine() {
       if (i < lines.length) {
         bootDiv.innerHTML += lines[i] + "\n";
         i++;
         setTimeout(typeLine, 1000);
+      } else {
+        bootComplete = true;
+        continueDiv.style.display = "block";
       }
     }
 
     typeLine();
 
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Enter") {
+      if (bootComplete && e.key === "Enter") {
         window.location.href = "main.html";
       }
     });
 
     document.addEventListener("click", function () {
-      window.location.href = "main.html";
+      if (bootComplete) {
+        window.location.href = "main.html";
+      }
     });
   </script>
 </body>

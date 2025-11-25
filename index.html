@@ -26,16 +26,6 @@
       "Decrypting mission logs...",
       "Establishing temporal link...",
       "Boot sequence complete. Access granted."
-      
-      document.addEventListener("keydown", function (e) {
-  if (e.key === "Enter") {
-    window.location.href = "main.html";
-  }
-});
-
-document.addEventListener("click", function () {
-  window.location.href = "main.html";
-});
     ];
 
     let i = 0;
@@ -50,6 +40,16 @@ document.addEventListener("click", function () {
     }
 
     typeLine();
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        window.location.href = "main.html";
+      }
+    });
+
+    document.addEventListener("click", function () {
+      window.location.href = "main.html";
+    });
   </script>
 </body>
 </html>

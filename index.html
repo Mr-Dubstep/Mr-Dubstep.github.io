@@ -1,22 +1,44 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Project TimeTwister</title>
-    <style>
-      body {
-        background-color: black;
-        color: lime;
-        font-family: monospace;
-        text-align: center;
-        padding-top: 100px;
+<head>
+  <title>Booting TimeTwister...</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #00ffcc;
+      font-family: 'Courier New', monospace;
+      padding: 2em;
+    }
+    #boot {
+      white-space: pre-wrap;
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+<body>
+  <div id="boot"></div>
+
+  <script>
+    const lines = [
+      "Initializing Chrono-Core...",
+      "Loading AI Co-Pilot [Copilot vX]...",
+      "Decrypting mission logs...",
+      "Establishing temporal link...",
+      "Boot sequence complete. Welcome, Leeroy."
+    ];
+
+    let i = 0;
+    const bootDiv = document.getElementById("boot");
+
+    function typeLine() {
+      if (i < lines.length) {
+        bootDiv.innerHTML += lines[i] + "\n";
+        i++;
+        setTimeout(typeLine, 1000);
       }
-      h1 {
-        font-size: 3em;
-      }
-    </style>
-  </head>
-  <body>
-    <h1> Project TimeTwister</h1>
-    <p>Chrono-core online. AI co-pilot linked. Ready for launch.</p>
-  </body>
+    }
+
+    typeLine();
+  </script>
+</body>
 </html>

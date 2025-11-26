@@ -33,7 +33,6 @@
       .then(data => {
         if (!data.online) {
           document.body.innerHTML = "<h1>🔒 Site is currently offline</h1>";
-          throw new Error("Site is offline");
         } else {
           startBootSequence();
         }

@@ -27,43 +27,61 @@
   <div id="continue">[Press Enter or click anywhere to continue]</div>
 
   <script>
-    const lines = [
-      "Initializing Chrono-Core...",
-      "Loading AI Co-Pilot [Copilot vX]...",
-      "Decrypting mission logs...",
-      "Establishing temporal link...",
-      "Boot sequence complete. Access granted."
-    ];
+    // Cloud toggle check
+    fetch("https://gist.githubusercontent.com/Mr-Dubstep/72ed9af53e96fcfb3d663cfec26ac1ff/raw/df06c7799a708529f07db04e2254ea5118147042/site-status.json")
+      .then(res => res.json())
+      .then(data => {
+        if (!data.online) {
+          document.body.innerHTML = "<h1>🔒 Site is currently offline</h1>";
+          throw new Error("Site is offline");
+        } else {
+          startBootSequence();
+        }
+      })
+      .catch(() => {
+        document.body.innerHTML = "<h1>⚠️ Error checking site status</h1>";
+      });
 
-    let i = 0;
-    const bootDiv = document.getElementById("boot");
-    const continueDiv = document.getElementById("continue");
-    let bootComplete = false;
+    // Boot sequence logic
+    function startBootSequence() {
+      const lines = [
+        "Initializing Chrono-Core...",
+        "Loading AI Co-Pilot [Copilot vX]...",
+        "Decrypting mission logs...",
+        "Establishing temporal link...",
+        "Boot sequence complete. Access granted."
+      ];
 
-    function typeLine() {
-      if (i < lines.length) {
-        bootDiv.innerHTML += lines[i] + "\n";
-        i++;
-        setTimeout(typeLine, 1000);
-      } else {
-        bootComplete = true;
-        continueDiv.style.display = "block";
+      let i = 0;
+      const bootDiv = document.getElementById("boot");
+      const continueDiv = document.getElementById("continue");
+      let bootComplete = false;
+
+      function typeLine() {
+        if (i < lines.length) {
+          bootDiv.innerHTML += lines[i] + "\n";
+          i++;
+          setTimeout(typeLine, 1000);
+        } else {
+          bootComplete = true;
+          continueDiv.style.display = "block";
+        }
       }
+
+      typeLine();
+
+      document.addEventListener("keydown", function (e) {
+        if (bootComplete && e.key === "Enter") {
+          window.location.href = "main.html";
+        }
+      });
+
+      document.addEventListener("click", function () {
+        if (bootComplete) {
+          window.location.href = "main.html";
+        }
+      });
     }
-
-    typeLine();
-
-    document.addEventListener("keydown", function (e) {
-      if (bootComplete && e.key === "Enter") {
-        window.location.href = "main.html";
-      }
-    });
-
-    document.addEventListener("click", function () {
-      if (bootComplete) {
-        window.location.href = "main.html";
-      }
-    });
   </script>
 </body>
 </html>

@@ -27,8 +27,10 @@
   <div id="continue">[Press Enter or click anywhere to continue]</div>
 
   <script>
-    // Cloud toggle check
-    fetch("https://gist.githubusercontent.com/Mr-Dubstep/72ed9af53e96fcfb3d663cfec26ac1ff/raw/df06c7799a708529f07db04e2254ea5118147042/site-status.json")
+    // Cloud toggle check with cache buster
+    const url = "https://gist.githubusercontent.com/Mr-Dubstep/72ed9af53e96fcfb3d663cfec26ac1ff/raw/site-status.json?" + new Date().getTime();
+
+    fetch(url)
       .then(res => res.json())
       .then(data => {
         if (!data.online) {
